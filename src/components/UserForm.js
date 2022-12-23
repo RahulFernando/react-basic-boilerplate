@@ -27,6 +27,8 @@ function UserForm() {
     () => console.log(values),
   );
 
+  // console.log(errors);
+
   return (
     <Box p={2} m={6}>
       <form onSubmit={handleSubmit}>

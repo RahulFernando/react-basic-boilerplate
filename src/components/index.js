@@ -5,6 +5,8 @@ import { Grid } from "@mui/material";
 import Shareholders from "./Shareholders";
 import ShareholderForm from "./ShareholderForm";
 
+import useFormik from "../hooks/useFormik";
+
 const ROWS = [
   {
     id: 1,
@@ -39,35 +41,37 @@ const initial = {
 };
 
 const Index = () => {
+  const { formData, onChange, onReset } = useFormik(initial);
   const [shareholders, setShareholders] = useState(ROWS);
-  const [shareholder, setShareholder] = useState(initial);
+  //const [shareholder, setShareholder] = useState(initial);
 
-  const changeHandler = (event) =>
-    setShareholder({ ...shareholder, [event.target.name]: event.target.value });
+  // const changeHandler = (event) =>
+  //   setShareholder({ ...shareholder, [event.target.name]: event.target.value });
 
-  // delete shareolder by id
+  // delete shareholder by id
   const deleteHandler = (id) =>
     setShareholders([
       ...shareholders.filter((shareholder) => shareholder.id !== id),
     ]);
 
-    // handle form submit
+  // handle form submit
   const submitHandler = (event) => {
     event.preventDefault();
 
     /**
      * TODO
-     * Handle upate functionality
+     * Handle update functionality
      * HINT: if id exists update, otherwise add a new row
      */
 
-    setShareholders([...shareholders, { ...shareholder, id: new Date() }]);
-    setShareholder(initial);
+    setShareholders([...shareholders, { ...formData, id: new Date() }]);
+    //setShareholder(initial);
+    onReset();
   };
 
   /**
    * TODO
-   * Implement a function name rowClickHandler and 
+   * Implement a function name rowClickHandler and
    * load values to input fields when a row clicked
    */
 
@@ -75,8 +79,8 @@ const Index = () => {
     <Grid container spacing={3} sx={{ p: 2 }}>
       <Grid item xs={12}>
         <ShareholderForm
-          shareholder={shareholder}
-          onChange={changeHandler}
+          shareholder={formData}
+          onChange={onChange}
           onSubmit={submitHandler}
         />
       </Grid>

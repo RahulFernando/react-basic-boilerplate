@@ -17,6 +17,17 @@ shareholder.
  - Select and update shareholder using API.
  - Delete shareholder using API.
 
+## Shareholder Modal
+
+  - id
+  - name
+  - address
+  - business_registration
+  - ownership_type
+  - share_count
+  - value_per_share
+  - share_class
+
 
 ## Prerequisites
 
